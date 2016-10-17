@@ -21,5 +21,4 @@ WORKDIR /projects
 ENV DATABASE_URL=mongodb://localhost:27017/my_project_development \
     TERM=xterm
 
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["sudo", "env", "HOME=/root", "nami", "start", "--foreground", "mongodb"]
+CMD ["/entrypoint.sh", "sudo", "env", "HOME=/root", "nami", "start", "--foreground", "mongodb"]
