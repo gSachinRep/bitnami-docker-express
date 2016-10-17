@@ -1,36 +1,37 @@
 {
   "v": "4.0",
   "workspace": {
-    "name": "express",
-    "defaultEnv": "express",
-    "environments": [
-      {
-        "name": "express",
-        "recipe": null,
-        "machineConfigs": [
-          {
-            "name": "ws-machine",
-            "limits": {
-              "ram": 1024
-            },
-            "source": {
-              "type": "image",
-              "location": "bitnami/che-express:che-4.14.0-r1"
-            },
-            "type": "docker",
-            "dev": true
+    "environments": {
+      "default": {
+        "recipe": {
+          "type": "dockerimage",
+          "location": "bitnami/che-express:che-4.14.0-r4"
+        },
+        "machines": {
+          "ws-machine": {
+            "agents": [
+              "org.eclipse.che.terminal",
+              "org.eclipse.che.ws-agent",
+              "org.eclipse.che.ssh"
+            ],
+            "servers": {},
+            "attributes": {
+              "memoryLimitsBytes": "1073741824"
+            }
           }
-        ]
+        }
       }
-    ],
+    },
+    "name": "bitnami-express",
+    "defaultEnv": "default",
     "projects": [
       {
-        "name": "express-sample",
+        "name": "express",
         "type": "node-js",
-        "path": "/express-sample",
+        "path": "/express",
         "source": {
           "type": "git",
-          "location": "https://github.com/bitnami/bitnami-docker-che-blank-sample",
+          "location": "https://github.com/bitnami/bitnami-docker-che-blank-sample.git",
           "parameters": {
             "keepVcs": "false"
           }
@@ -39,8 +40,8 @@
           "pullrequest"
         ],
         "attributes": {
-          "local_branch": [ "contrib" ],
-          "contribute_to_branch" : [ "master" ]
+          "local_branch": ["contrib"],
+          "contribute_to_branch": ["master"]
         },
         "modules": [],
         "problems": []
@@ -48,26 +49,26 @@
     ],
     "commands": [
       {
-        "name": "2. Run",
-        "type": "custom",
-        "commandLine": "source /opt/bitnami/stacksmith-utils.sh && print_welcome_page && cd ${current.project.path} && npm start",
-        "attributes": {
-          "previewUrl": "http://${server.port.3000}/"
-        }
-      },
-      {
-        "name": "1. Create project",
-        "type": "custom",
-        "commandLine": "source /opt/bitnami/stacksmith-utils.sh && print_welcome_page && cd ${current.project.path} && npm install express@4.13.4 && express -f . && cp -rn /bitnami/mongodb/conf ${current.project.path} && npm install mongodb@2.1.18 --save && npm install && counter=0; until nc -z localhost 27017; do counter=$((counter+1)); if [ $counter == 10 ]; then echo \"Error: Couldn't connect to MongoDB.\"; exit 1; fi; echo \"Trying to connect to MongoDB at localhost. Attempt $counter.\"; sleep 5; done; echo \"Connected to MongoDB database. Starting application server.\" && npm start",
-        "attributes": {
-          "previewUrl": "http://${server.port.3000}/"
-        }
-      },
-      {
-        "name": "3. Stop",
+        "name": "2. Stop",
         "type": "custom",
         "commandLine": "source /opt/bitnami/stacksmith-utils.sh && print_welcome_page && cd ${current.project.path} && pkill -u bitnami node && echo \"Web server stopped.\"",
         "attributes": {}
+      },
+      {
+        "name": "3. Run",
+        "type": "custom",
+        "commandLine": "source /opt/bitnami/stacksmith-utils.sh && print_welcome_page && cd ${current.project.path} && npm start",
+        "attributes": {
+          "previewUrl": "http://${server.port.3000}"
+        }
+      },
+      {
+        "name": "1. Create and run project",
+        "type": "custom",
+        "commandLine": "source /opt/bitnami/stacksmith-utils.sh && print_welcome_page && cd ${current.project.path} && npm install express@4.13.4 && express -f . && cp -rn /bitnami/mongodb/conf ${current.project.path} && npm install mongodb@2.1.18 --save && npm install && counter=0; until nc -z localhost 27017; do counter=$((counter+1)); if [ $counter == 10 ]; then echo \"Error: Couldn't connect to MongoDB.\"; exit 1; fi; echo \"Trying to connect to MongoDB at localhost. Attempt $counter.\"; sleep 5; done; echo \"Connected to MongoDB database. Starting application server.\" && npm start",
+        "attributes": {
+          "previewUrl": "http://${server.port.3000}"
+        }
       }
     ]
   },
@@ -77,7 +78,7 @@
         {
           "id": "runCommand",
           "properties": {
-            "name": "1. Create project"
+            "name": "1. Create and run project"
           }
         }
       ]
