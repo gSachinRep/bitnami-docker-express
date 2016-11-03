@@ -22,7 +22,7 @@
         }
       }
     },
-    "name": "bitnami-express",
+    "name": "express",
     "defaultEnv": "default",
     "projects": [
       {
