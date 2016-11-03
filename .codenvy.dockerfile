@@ -1,4 +1,4 @@
-FROM bitnami/express:4.14.0-r4
+FROM bitnami/express:4.14.0-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
