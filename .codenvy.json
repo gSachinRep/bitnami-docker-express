@@ -5,7 +5,7 @@
       "default": {
         "recipe": {
           "type": "dockerimage",
-          "location": "bitnami/che-express:che-4.14.0-r10"
+          "location": "bitnami/che-express:che-4.14.0-r11"
         },
         "machines": {
           "ws-machine": {
@@ -51,13 +51,13 @@
       {
         "name": "2. Stop",
         "type": "custom",
-        "commandLine": "source /opt/bitnami/stacksmith-utils.sh && print_welcome_page && cd ${current.project.path} && pkill -u bitnami node && echo \"Web server stopped.\"",
+        "commandLine": "print-help && cd ${current.project.path} && pkill -u bitnami node && echo \"Web server stopped.\"",
         "attributes": {}
       },
       {
         "name": "3. Run",
         "type": "custom",
-        "commandLine": "source /opt/bitnami/stacksmith-utils.sh && print_welcome_page && cd ${current.project.path} && npm start",
+        "commandLine": "print-help && cd ${current.project.path} && npm start",
         "attributes": {
           "previewUrl": "http://${server.port.3000}"
         }
@@ -65,7 +65,7 @@
       {
         "name": "1. Create and run project",
         "type": "custom",
-        "commandLine": "source /opt/bitnami/stacksmith-utils.sh && print_welcome_page && cd ${current.project.path} && npm install express@4.13.4 && express -f . && cp -rn /bitnami/mongodb/conf ${current.project.path} && npm install mongodb@2.1.18 --save && npm install && counter=0; until nc -z localhost 27017; do counter=$((counter+1)); if [ $counter == 10 ]; then echo \"Error: Couldn't connect to MongoDB.\"; exit 1; fi; echo \"Trying to connect to MongoDB at localhost. Attempt $counter.\"; sleep 5; done; echo \"Connected to MongoDB database. Starting application server.\" && npm start",
+        "commandLine": "print-help && cd ${current.project.path} && npm install express@4.13.4 && express -f . && cp -rn /bitnami/mongodb/conf ${current.project.path} && npm install mongodb@2.1.18 --save && npm install && counter=0; until nc -z localhost 27017; do counter=$((counter+1)); if [ $counter == 10 ]; then echo \"Error: Couldn't connect to MongoDB.\"; exit 1; fi; echo \"Trying to connect to MongoDB at localhost. Attempt $counter.\"; sleep 5; done; echo \"Connected to MongoDB database. Starting application server.\" && npm start",
         "attributes": {
           "previewUrl": "http://${server.port.3000}"
         }
