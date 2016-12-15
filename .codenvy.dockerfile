@@ -5,7 +5,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 USER root
 
 ENV BITNAMI_APP_NAME=che-express
-ENV BITNAMI_IMAGE_VERSION=4.14.0-r12
+ENV BITNAMI_IMAGE_VERSION=4.14.0-r13
 
 # Install MongoDB module
 RUN bitnami-pkg unpack mongodb-3.2.9-0 --checksum 367db26aa2b687e8a389073809602412bde95d5800f655f4221ab39dc251cd1f
