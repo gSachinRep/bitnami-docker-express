@@ -8,7 +8,8 @@ ENV BITNAMI_APP_NAME=che-express
 ENV BITNAMI_IMAGE_VERSION=4.14.0-r15
 
 # Install MongoDB module
-RUN bitnami-pkg unpack mongodb-3.2.9-0 --checksum 367db26aa2b687e8a389073809602412bde95d5800f655f4221ab39dc251cd1f
+RUN install_packages libssl1.0.0 libc6 libgcc1 libpcap0.8
+RUN bitnami-pkg unpack mongodb-3.4.1-1 --checksum 1169f363922417c5d445b1edb7ffda8561e6f6a725b072edca7781dd1859fba0
 ENV PATH=/opt/bitnami/mongodb/sbin:/opt/bitnami/mongodb/bin:$PATH
 
 RUN nami initialize mongodb
