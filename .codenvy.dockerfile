@@ -1,11 +1,11 @@
-FROM bitnami/express:4.14.0-r15
+FROM bitnami/express:4.14.0-r16
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 USER root
 
 ENV BITNAMI_APP_NAME=che-express
-ENV BITNAMI_IMAGE_VERSION=4.14.0-r15
+ENV BITNAMI_IMAGE_VERSION=4.14.0-r16
 
 # Install MongoDB module
 RUN install_packages libssl1.0.0 libc6 libgcc1 libpcap0.8
