@@ -10,7 +10,7 @@ RUN install_packages git subversion openssh-server rsync
 RUN mkdir /var/run/sshd && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 ENV BITNAMI_APP_NAME=che-express
-ENV BITNAMI_IMAGE_VERSION=4.14.0-r17
+ENV BITNAMI_IMAGE_VERSION=4.14.0-r18
 
 # Install MongoDB module
 RUN install_packages libssl1.0.0 libc6 libgcc1 libpcap0.8
@@ -31,6 +31,5 @@ ENV DATABASE_URL=mongodb://localhost:27017/my_project_development \
     TERM=xterm
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD [ "sudo", "env", "HOME=/root", "nami", "start", "--foreground", "mongodb"]
-CMD sudo /usr/sbin/sshd -D && sudo env HOME=/root nami start --foreground mongodb
+CMD sudo /usr/sbin/sshd && sudo env HOME=/root nami start --foreground mongodb
 
