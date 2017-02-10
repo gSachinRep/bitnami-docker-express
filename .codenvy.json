@@ -49,13 +49,7 @@
     ],
     "commands": [
       {
-        "name": "2. Stop",
-        "type": "custom",
-        "commandLine": "print-help && cd ${current.project.path} && pkill -u bitnami node && echo \"Web server stopped.\"",
-        "attributes": {}
-      },
-      {
-        "name": "3. Run",
+        "name": "2. Run",
         "type": "custom",
         "commandLine": "print-help && cd ${current.project.path} && npm start",
         "attributes": {
