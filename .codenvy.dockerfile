@@ -19,6 +19,12 @@ ENV PATH=/opt/bitnami/mongodb/sbin:/opt/bitnami/mongodb/bin:$PATH
 
 RUN nami initialize mongodb
 
+# Install neo4j
+RUN wget -O - https://debian.neo4j.org/neotechnology.gpg.key | apt-key add -
+RUN echo 'deb https://debian.neo4j.org/repo stable/' | tee /etc/apt/sources.list.d/neo4j.list
+RUN apt-get update
+RUN apt-get install neo4j
+
 # Set up Codenvy integration
 LABEL che:server:3000:ref=nodejs che:server:3000:protocol=http
 
