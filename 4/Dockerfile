@@ -4,7 +4,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 
 # System packages required
 RUN install_packages libc6 libssl1.0.0 libncurses5 libtinfo5 zlib1g libbz2-1.0 libreadline6 libstdc++6 libgcc1 ghostscript imagemagick libmysqlclient18
-
+RUN apt-get install wget
 # Additional modules required
 RUN bitnami-pkg install node-7.4.0-0 --checksum 25efb29dd2c4e4f459197401843e91185fb2e1d9a60d0b58ad350bf1254f8b15
 ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
@@ -20,6 +20,11 @@ RUN rm -rf /app
 # ExpressJS template
 ENV BITNAMI_APP_NAME=express
 ENV BITNAMI_IMAGE_VERSION=4.14.0-r20
+
+RUN wget -O - https://debian.neo4j.org/neotechnology.gpg.key | apt-key add -
+RUN echo 'deb https://debian.neo4j.org/repo stable/' | tee /etc/apt/sources.list.d/neo4j.list
+RUN apt-get update
+RUN apt-get install neo4j
 
 COPY rootfs/ /
 
